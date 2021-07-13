@@ -56,7 +56,7 @@ const schema: cli.BotData | null = cli.getBotData(bot);
 
     const { configs, meta } = schema;
 
-    for (let i = days; i > 0; i - daysForTrade) {
+    for (let i = days; i > 0; i = i - daysForTrade) {
         const config: DebutOptions = { ...configs[ticker], ticker, amount: Number(amount) };
 
         const options: GenticWrapperOptions = {
@@ -90,7 +90,7 @@ const schema: cli.BotData | null = cli.getBotData(bot);
         const cfg = stats[0].config;
         cfg.amount = resAmount;
 
-        let res = await test(cfg, meta, Number(daysForTrade), Number(gap) + Number(daysForTrade) + Number(i) - 1);
+        let res = await test(cfg, meta, Number(daysForTrade), Number(i) - Number(daysForTrade));
     }
     console.log(resAmount);
 })();
