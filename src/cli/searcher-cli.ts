@@ -56,7 +56,7 @@ const schema: cli.BotData | null = cli.getBotData(bot);
 
     const { configs, meta } = schema;
 
-    for (let i = 0; i < days; i++) {
+    for (let i = days; i > 0; i--) {
         const config: DebutOptions = { ...configs[ticker], ticker, amount: Number(amount) };
 
         const options: GenticWrapperOptions = {
@@ -90,6 +90,7 @@ const schema: cli.BotData | null = cli.getBotData(bot);
 
         let res = await test(cfg, meta, daysForTrade, gap + daysForTrade + i - 1);
     }
+    console.log(resAmount);
 })();
 
 async function test(cfg: DebutOptions, meta: DebutMeta, daysForTrade: number, gapMove: number) {
@@ -117,7 +118,7 @@ async function test(cfg: DebutOptions, meta: DebutMeta, daysForTrade: number, ga
         await bot.closeAll();
         await bot.dispose();
         console.log(meta.stats(bot));
-        console.log(meta.score(bot));
+        // console.log(meta.score(bot));
         resAmount = resAmount + Number(meta.score(bot));
     } catch (e) {
         console.log(e);
