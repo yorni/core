@@ -54,9 +54,10 @@ const schema: cli.BotData | null = cli.getBotData(bot);
     }
 
     const { configs, meta } = schema;
-    const config: DebutOptions = { ...configs[ticker], ticker, amount: Number(amount) };
 
     for (let i = 0; i < days; i++) {
+        const config: DebutOptions = { ...configs[ticker], ticker, amount: Number(amount) };
+
         const options: GenticWrapperOptions = {
             days: daysForStudy,
             hours,
@@ -64,7 +65,7 @@ const schema: cli.BotData | null = cli.getBotData(bot);
             populationSize: pop,
             log,
             ohlc,
-            gapDays: gap + i,
+            gapDays: gap + daysForTrade + i,
             validateSchema: meta.validate,
             score: meta.score,
             stats: meta.stats,
@@ -85,11 +86,11 @@ const schema: cli.BotData | null = cli.getBotData(bot);
 
         const cfg = stats[0].config;
 
-        test(cfg, meta);
+        let res = await test(cfg, meta, daysForTrade, gap + daysForTrade + i - 1);
     }
 })();
 
-async function test(cfg: DebutOptions, meta: DebutMeta) {
+async function test(cfg: DebutOptions, meta: DebutMeta, daysForTrade: number, gapMove: number) {
     try {
         const transport = new TesterTransport({ ohlc, comission: cfg.fee, broker: cfg.broker, ticker: cfg.ticker });
         const bot = await meta.create(transport, cfg, WorkingEnv.tester);
@@ -100,7 +101,7 @@ async function test(cfg: DebutOptions, meta: DebutMeta) {
         }
 
         const { broker = 'tinkoff', ticker, interval } = cfg;
-        let ticks = await getHistory({ broker, ticker, interval, days, gapDays: gap });
+        let ticks = await getHistory({ broker, ticker, interval, days: daysForTrade, gapDays: gapMove });
 
         if (meta.ticksFilter) {
             ticks = ticks.filter(meta.ticksFilter(cfg));
