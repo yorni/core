@@ -17,7 +17,19 @@ type GeneticParams = {
 };
 
 const args = cli.getArgs() as GeneticParams;
-const { bot, ticker, log, amount = 10000, days = 1000, hours = 0, gen = 12, pop = 2000, ohlc, gap = 0, best = 5  } = args;
+const {
+    bot,
+    ticker,
+    log,
+    amount = 10000,
+    days = 1000,
+    hours = 0,
+    gen = 12,
+    pop = 2000,
+    ohlc,
+    gap = 0,
+    best = 5,
+} = args;
 
 const schema: cli.BotData | null = cli.getBotData(bot);
 
@@ -53,6 +65,5 @@ const schema: cli.BotData | null = cli.getBotData(bot);
         return item;
     });
 
-    console.log(stats);
-    console.log("stats from searcher");
+    console.log(stats[0].stats);
 })();
