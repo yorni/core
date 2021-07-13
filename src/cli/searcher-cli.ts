@@ -66,7 +66,7 @@ const schema: cli.BotData | null = cli.getBotData(bot);
             populationSize: pop,
             log,
             ohlc,
-            gapDays: gap + daysForTrade + i,
+            gapDays: Number(gap) + Number(daysForTrade) + Number(i),
             validateSchema: meta.validate,
             score: meta.score,
             stats: meta.stats,
@@ -75,7 +75,7 @@ const schema: cli.BotData | null = cli.getBotData(bot);
             best,
         };
 
-        console.log(options);
+        //console.log(options);
 
         const genetic = new GeneticWrapper(options);
         let stats = await genetic.start(meta.parameters, config);
@@ -90,7 +90,7 @@ const schema: cli.BotData | null = cli.getBotData(bot);
         const cfg = stats[0].config;
         cfg.amount = resAmount;
 
-        let res = await test(cfg, meta, daysForTrade, gap + daysForTrade + i - 1);
+        let res = await test(cfg, meta, Number(daysForTrade), Number(gap) + Number(daysForTrade) + Number(i) - 1);
     }
     console.log(resAmount);
 })();
