@@ -26,6 +26,7 @@ const cli = {
         finder: 'src/cli/finder-cli.ts',
         genetic: 'src/cli/genetic-cli.ts',
         tester: 'src/cli/tester-cli.ts',
+        searcher: 'src/cli/searcher-cli.ts',
     },
     output: {
         dir: 'lib/cli',
