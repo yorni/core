@@ -117,8 +117,8 @@ async function test(cfg: DebutOptions, meta: DebutMeta, daysForTrade: number, ga
         await bot.closeAll();
         await bot.dispose();
         console.log(meta.stats(bot));
-        console.log(meta.stats);
-        // resAmount = resAmount+ meta.stats;
+        console.log(meta.score(bot));
+        resAmount = resAmount + meta.score(bot);
     } catch (e) {
         console.log(e);
     }
