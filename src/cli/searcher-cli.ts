@@ -75,6 +75,8 @@ const schema: cli.BotData | null = cli.getBotData(bot);
             best,
         };
 
+        console.log(options);
+
         const genetic = new GeneticWrapper(options);
         let stats = await genetic.start(meta.parameters, config);
 
@@ -83,7 +85,7 @@ const schema: cli.BotData | null = cli.getBotData(bot);
             return item;
         });
 
-        console.log(stats[0].config);
+        //console.log(stats[0].config);
 
         const cfg = stats[0].config;
         cfg.amount = resAmount;
