@@ -44,6 +44,7 @@ const {
     daysForStudy = 2,
     daysForTrade = 1,
 } = args;
+let resAmount = amount;
 
 const schema: cli.BotData | null = cli.getBotData(bot);
 
@@ -82,9 +83,10 @@ const schema: cli.BotData | null = cli.getBotData(bot);
             return item;
         });
 
-        //console.log(stats[0].config);
+        console.log(stats[0].config);
 
         const cfg = stats[0].config;
+        cfg.amount = resAmount;
 
         let res = await test(cfg, meta, daysForTrade, gap + daysForTrade + i - 1);
     }
@@ -115,6 +117,8 @@ async function test(cfg: DebutOptions, meta: DebutMeta, daysForTrade: number, ga
         await bot.closeAll();
         await bot.dispose();
         console.log(meta.stats(bot));
+        console.log(meta.stats);
+        // resAmount = resAmount+ meta.stats;
     } catch (e) {
         console.log(e);
     }
