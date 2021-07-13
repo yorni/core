@@ -10,7 +10,7 @@
     "types": "lib/index.d.ts",
     "scripts": {
         "compile": "tsc",
-        "build": "rollup -c && chmod -R +x ./lib/cli/**.js",
+        "build": "rollup -c ",
         "start": "ts-node --",
         "prettier": "prettier --config './.prettierrc' --write 'src/**/*.ts'",
         "version": "npm run build",
