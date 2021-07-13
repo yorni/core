@@ -56,7 +56,7 @@ const schema: cli.BotData | null = cli.getBotData(bot);
 
     const { configs, meta } = schema;
 
-    for (let i = days; i > 0; i--) {
+    for (let i = days; i > 0; i - daysForTrade) {
         const config: DebutOptions = { ...configs[ticker], ticker, amount: Number(amount) };
 
         const options: GenticWrapperOptions = {
