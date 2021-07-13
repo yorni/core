@@ -23,7 +23,8 @@
     "bin": {
         "tester": "lib/cli/tester.js",
         "finder": "lib/cli/finder.js",
-        "genetic": "lib/cli/genetic.js"
+        "genetic": "lib/cli/genetic.js",
+        "searcher": "lib/cli/searcher.js"
     },
     "dependencies": {
         "@debut/plugin-utils": "^1.0.14",
