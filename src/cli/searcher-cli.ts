@@ -44,7 +44,7 @@ const {
     daysForStudy = 2,
     daysForTrade = 1,
 } = args;
-let resAmount = amount;
+let resAmount = Number(amount);
 
 const schema: cli.BotData | null = cli.getBotData(bot);
 
@@ -118,7 +118,7 @@ async function test(cfg: DebutOptions, meta: DebutMeta, daysForTrade: number, ga
         await bot.dispose();
         console.log(meta.stats(bot));
         console.log(meta.score(bot));
-        resAmount = resAmount + meta.score(bot);
+        resAmount = resAmount + Number(meta.score(bot));
     } catch (e) {
         console.log(e);
     }
