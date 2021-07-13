@@ -82,7 +82,7 @@ const schema: cli.BotData | null = cli.getBotData(bot);
             return item;
         });
 
-        console.log(stats[0].config);
+        //console.log(stats[0].config);
 
         const cfg = stats[0].config;
 
@@ -107,7 +107,7 @@ async function test(cfg: DebutOptions, meta: DebutMeta, daysForTrade: number, ga
             ticks = ticks.filter(meta.ticksFilter(cfg));
         }
 
-        console.log('\n---- Tinkoff [' + cfg.ticker + '] ----\n');
+        //console.log('\n---- Tinkoff [' + cfg.ticker + '] ----\n');
         console.log('Tested in ', ticks.length, ' candles...');
         transport.setTicks(ticks);
         await bot.start();
