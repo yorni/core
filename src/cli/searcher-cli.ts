@@ -85,6 +85,8 @@ const schema: cli.BotData | null = cli.getBotData(bot);
             return item;
         });
 
+        //1
+
         //console.log(stats[0].config);
 
         const cfg = stats[0].config;
