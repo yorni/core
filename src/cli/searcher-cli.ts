@@ -92,7 +92,7 @@ const schema: cli.BotData | null = cli.getBotData(bot);
         const cfg = stats[0].config;
         cfg.amount = resAmount;
 
-        let res = await test(cfg, meta, Number(daysForTrade), Number(i) - Number(daysForTrade));
+        let res = await test(cfg, meta, Number(daysForTrade), Number(i) - Number(daysForTrade) + 1);
     }
     console.log(resAmount);
 })();

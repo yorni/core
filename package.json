@@ -16,7 +16,8 @@
         "version": "npm run build",
         "test": "jest",
         "bench": "npm start ./tools/bench.ts",
-        "postversion": "git push && git push --tags"
+        "postversion": "git push && git push --tags",
+        "git": "npm run build && git add . && git commit -m 'searcher'&& npm run build"
     },
     "author": "Dmitry Yurov",
     "license": "Apache-2.0",
