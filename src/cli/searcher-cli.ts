@@ -106,7 +106,7 @@ const schema: cli.BotData | null = cli.getBotData(bot);
 
         //let res = await test(cfg, meta, Number(daysForTrade), Number(i) - Number(daysForTrade));
     }
-    console.log(resAmount);
+    //console.log(resAmount);
 })();
 
 async function test(cfg: DebutOptions, meta: DebutMeta, daysForTrade: number, gapMove: number) {
