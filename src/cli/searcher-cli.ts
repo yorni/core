@@ -1,4 +1,4 @@
-import { cli } from '@debut/plugin-utils';
+import { cli, file } from '@debut/plugin-utils';
 import { DebutOptions, GenticWrapperOptions, DebutMeta, WorkingEnv } from '@debut/types';
 import { GeneticWrapper } from './tester/genetic';
 import { TesterTransport } from './tester/tester-transport';
@@ -27,7 +27,7 @@ type GeneticParams = {
     daysForStudy?: number;
     daysForTrade?: number;
 };
-
+const DAY = 86400000;
 const args = cli.getArgs() as GeneticParams;
 const {
     bot,
@@ -55,8 +55,11 @@ const schema: cli.BotData | null = cli.getBotData(bot);
     }
 
     const { configs, meta } = schema;
+    const now = new Date();
+    const stamp = roundDay(now.getTime());
 
-    for (let i = days; i > 0; i = i - daysForTrade) {
+    // for (let i = days; i > 0; i = i - daysForTrade) {
+    for (let i = days; i > 0; i--) {
         const config: DebutOptions = { ...configs[ticker], ticker, amount: Number(amount) };
 
         const options: GenticWrapperOptions = {
@@ -92,7 +95,14 @@ const schema: cli.BotData | null = cli.getBotData(bot);
         const cfg = stats[0].config;
         cfg.amount = resAmount;
 
-        let res = await test(cfg, meta, Number(daysForTrade), Number(i) - Number(daysForTrade));
+        let end = roundDay(stamp - DAY * i);
+        let date = new Date(end);
+        let fileName = '' + date.getFullYear + date.getMonth + date.getDay;
+        const path = `public/data/tickers/${cfg.ticker}/${cfg.interval}/${fileName}.json`;
+        file.ensureFile(path);
+        file.saveFile(path, cfg);
+
+        //let res = await test(cfg, meta, Number(daysForTrade), Number(i) - Number(daysForTrade));
     }
     console.log(resAmount);
 })();
@@ -127,4 +137,8 @@ async function test(cfg: DebutOptions, meta: DebutMeta, daysForTrade: number, ga
     } catch (e) {
         console.log(e);
     }
+}
+
+function roundDay(stamp: number) {
+    return ~~(stamp / DAY) * DAY;
 }
