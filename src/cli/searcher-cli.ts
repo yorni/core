@@ -97,7 +97,7 @@ const schema: cli.BotData | null = cli.getBotData(bot);
 
         let end = roundDay(stamp - DAY * i);
         let date = new Date(end);
-        let fileName = '' + date.getFullYear + date.getMonth + date.getDay;
+        let fileName = '' + date.getFullYear() + date.getMonth() + date.getDay();
         const path = `public/data/tickers/${cfg.ticker}/${cfg.interval}/${fileName}.json`;
         file.ensureFile(path);
         file.saveFile(path, cfg);
