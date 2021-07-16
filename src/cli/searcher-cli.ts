@@ -59,7 +59,7 @@ const schema: cli.BotData | null = cli.getBotData(bot);
     const stamp = roundDay(now.getTime());
 
     // for (let i = days; i > 0; i = i - daysForTrade) {
-    for (let i = days; i > 0; i--) {
+    for (let i = days; i != 0; i--) {
         const config: DebutOptions = { ...configs[ticker], ticker, amount: Number(amount) };
 
         const options: GenticWrapperOptions = {
